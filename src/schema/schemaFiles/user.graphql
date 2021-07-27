@@ -1,0 +1,12 @@
+type Query {
+	getUser(id: Int!): User!
+}
+
+type User {
+	id: Int!
+	admin: Boolean!
+	name: String
+	username: String!
+	createdAt: String!
+	createdBy: String
+}
