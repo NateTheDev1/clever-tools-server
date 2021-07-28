@@ -1,5 +1,6 @@
 type Query {
 	getProperties(year: String!): [Property]!
+	getStatistics: Statistic!
 }
 
 type Mutation {
@@ -43,4 +44,11 @@ type UpdateLog {
 	roomId: Int!
 	timestamp: String!
 	room: String!
+}
+
+type Statistic {
+	totalProperties: Int!
+	totalOpenRooms: Int!
+	totalUnavailableRooms: Int!
+	totalRooms: Int!
 }

@@ -82,6 +82,7 @@ interface Property {
 interface Query {
   __typename?: 'Query';
   getProperties: Array<Maybe<Property>>;
+  getStatistics: Statistic;
   getUser: User;
 }
 
@@ -103,6 +104,14 @@ interface Room {
   available: Scalars['Boolean'];
   year: Scalars['String'];
   updates: Array<Maybe<UpdateLog>>;
+}
+
+interface Statistic {
+  __typename?: 'Statistic';
+  totalProperties: Scalars['Int'];
+  totalOpenRooms: Scalars['Int'];
+  totalUnavailableRooms: Scalars['Int'];
+  totalRooms: Scalars['Int'];
 }
 
 interface UpdateLog {
@@ -217,6 +226,7 @@ export type ResolversTypes = {
   Property: ResolverTypeWrapper<Property>;
   Query: ResolverTypeWrapper<{}>;
   Room: ResolverTypeWrapper<Room>;
+  Statistic: ResolverTypeWrapper<Statistic>;
   UpdateLog: ResolverTypeWrapper<UpdateLog>;
   User: ResolverTypeWrapper<User>;
 };
@@ -234,6 +244,7 @@ export type ResolversParentTypes = {
   Property: Property;
   Query: {};
   Room: Room;
+  Statistic: Statistic;
   UpdateLog: UpdateLog;
   User: User;
 };
@@ -257,6 +268,7 @@ export type PropertyResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   getProperties?: Resolver<Array<Maybe<ResolversTypes['Property']>>, ParentType, ContextType, RequireFields<QueryGetPropertiesArgs, 'year'>>;
+  getStatistics?: Resolver<ResolversTypes['Statistic'], ParentType, ContextType>;
   getUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserArgs, 'id'>>;
 };
 
@@ -267,6 +279,14 @@ export type RoomResolvers<ContextType = any, ParentType extends ResolversParentT
   available?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   year?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updates?: Resolver<Array<Maybe<ResolversTypes['UpdateLog']>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type StatisticResolvers<ContextType = any, ParentType extends ResolversParentTypes['Statistic'] = ResolversParentTypes['Statistic']> = {
+  totalProperties?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  totalOpenRooms?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  totalUnavailableRooms?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  totalRooms?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -293,6 +313,7 @@ export type Resolvers<ContextType = any> = {
   Property?: PropertyResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Room?: RoomResolvers<ContextType>;
+  Statistic?: StatisticResolvers<ContextType>;
   UpdateLog?: UpdateLogResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };

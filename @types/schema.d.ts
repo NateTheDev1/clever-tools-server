@@ -79,6 +79,7 @@ interface Property {
 interface Query {
   __typename?: 'Query';
   getProperties: Array<Maybe<Property>>;
+  getStatistics: Statistic;
   getUser: User;
 }
 
@@ -100,6 +101,14 @@ interface Room {
   available: Scalars['Boolean'];
   year: Scalars['String'];
   updates: Array<Maybe<UpdateLog>>;
+}
+
+interface Statistic {
+  __typename?: 'Statistic';
+  totalProperties: Scalars['Int'];
+  totalOpenRooms: Scalars['Int'];
+  totalUnavailableRooms: Scalars['Int'];
+  totalRooms: Scalars['Int'];
 }
 
 interface UpdateLog {

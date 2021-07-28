@@ -1,5 +1,6 @@
 type Query {
   getProperties(year: String!): [Property]!
+  getStatistics: Statistic!
   getUser(id: Int!): User!
 }
 
@@ -46,6 +47,13 @@ type UpdateLog {
   roomId: Int!
   timestamp: String!
   room: String!
+}
+
+type Statistic {
+  totalProperties: Int!
+  totalOpenRooms: Int!
+  totalUnavailableRooms: Int!
+  totalRooms: Int!
 }
 
 input LoginInput {
