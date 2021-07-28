@@ -1,5 +1,64 @@
 type Query {
+  getProperties(year: String!): [Property]!
   getUser(id: Int!): User!
+}
+
+type Mutation {
+  addProperty(input: AddPropertyInput!): Property!
+  addRoom(input: AddRoomInput!): Room!
+  createUser(user: CreateUserInput!): User!
+  login(credentials: LoginInput!): String!
+}
+
+input AddPropertyInput {
+  name: String!
+  address: String!
+  year: String!
+}
+
+input AddRoomInput {
+  propertyId: Int!
+  name: String!
+  available: Boolean!
+  year: String!
+}
+
+type Property {
+  id: Int!
+  name: String!
+  address: String!
+  totalRooms: Int!
+  availableRooms: Int!
+  year: String!
+}
+
+type Room {
+  id: Int!
+  propertyId: Int!
+  name: String!
+  available: Boolean!
+  year: String!
+  updates: [UpdateLog]!
+}
+
+type UpdateLog {
+  id: Int!
+  roomId: Int!
+  timestamp: String!
+  room: String!
+}
+
+input LoginInput {
+  username: String!
+  password: String!
+}
+
+input CreateUserInput {
+  admin: Boolean!
+  name: String
+  username: String!
+  password: String!
+  createdBy: String
 }
 
 type User {
@@ -13,4 +72,5 @@ type User {
 
 schema {
   query: Query
+  mutation: Mutation
 }

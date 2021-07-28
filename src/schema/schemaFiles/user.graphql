@@ -2,6 +2,24 @@ type Query {
 	getUser(id: Int!): User!
 }
 
+type Mutation {
+	createUser(user: CreateUserInput!): User!
+	login(credentials: LoginInput!): String!
+}
+
+input LoginInput {
+	username: String!
+	password: String!
+}
+
+input CreateUserInput {
+	admin: Boolean!
+	name: String
+	username: String!
+	password: String!
+	createdBy: String
+}
+
 type User {
 	id: Int!
 	admin: Boolean!

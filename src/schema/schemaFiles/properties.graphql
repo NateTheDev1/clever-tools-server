@@ -1,0 +1,46 @@
+type Query {
+	getProperties(year: String!): [Property]!
+}
+
+type Mutation {
+	addProperty(input: AddPropertyInput!): Property!
+	addRoom(input: AddRoomInput!): Room!
+}
+
+input AddPropertyInput {
+	name: String!
+	address: String!
+	year: String!
+}
+
+input AddRoomInput {
+	propertyId: Int!
+	name: String!
+	available: Boolean!
+	year: String!
+}
+
+type Property {
+	id: Int!
+	name: String!
+	address: String!
+	totalRooms: Int!
+	availableRooms: Int!
+	year: String!
+}
+
+type Room {
+	id: Int!
+	propertyId: Int!
+	name: String!
+	available: Boolean!
+	year: String!
+	updates: [UpdateLog]!
+}
+
+type UpdateLog {
+	id: Int!
+	roomId: Int!
+	timestamp: String!
+	room: String!
+}

@@ -1,4 +1,4 @@
-import User from '../../db/models/User';
+import User from '../../../db/models/User';
 
 export const getUser: Resolvers.QueryResolvers['getUser'] = async (
 	parent,
