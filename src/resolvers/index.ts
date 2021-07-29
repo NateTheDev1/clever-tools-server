@@ -1,5 +1,7 @@
 import { addProperty } from './mutation/properties/addProperty';
 import { addRoom } from './mutation/properties/addRoom';
+import { deleteProperty } from './mutation/properties/deleteProperty';
+import { deleteRoom } from './mutation/properties/deleteRoom';
 import { createUser } from './mutation/user/createUser';
 import { login } from './mutation/user/login';
 import { getProperties } from './query/properties/getProperties';
@@ -18,6 +20,8 @@ export const resolvers: Resolvers.Resolvers = {
 		createUser,
 		login,
 		addProperty,
-		addRoom
+		addRoom,
+		deleteProperty,
+		deleteRoom
 	}
 };

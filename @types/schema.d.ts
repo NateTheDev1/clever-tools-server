@@ -41,7 +41,9 @@ interface LoginInput {
 interface Mutation {
   __typename?: 'Mutation';
   addProperty: Property;
+  deleteProperty: Scalars['Boolean'];
   addRoom: Room;
+  deleteRoom: Scalars['Boolean'];
   createUser: User;
   login: Scalars['String'];
 }
@@ -52,8 +54,18 @@ interface MutationAddPropertyArgs {
 }
 
 
+interface MutationDeletePropertyArgs {
+  id: Scalars['Int'];
+}
+
+
 interface MutationAddRoomArgs {
   input: AddRoomInput;
+}
+
+
+interface MutationDeleteRoomArgs {
+  id: Scalars['Int'];
 }
 
 
@@ -76,16 +88,28 @@ interface Property {
   year: Scalars['String'];
 }
 
+interface PropertyEntity {
+  __typename?: 'PropertyEntity';
+  property: Property;
+  rooms: Array<Maybe<Room>>;
+}
+
 interface Query {
   __typename?: 'Query';
   getProperties: Array<Maybe<Property>>;
   getStatistics: Statistic;
+  getPropertyEntity: PropertyEntity;
   getUser: User;
 }
 
 
 interface QueryGetPropertiesArgs {
   year: Scalars['String'];
+}
+
+
+interface QueryGetPropertyEntityArgs {
+  propertyId: Scalars['Int'];
 }
 
 

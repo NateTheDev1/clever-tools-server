@@ -44,7 +44,9 @@ interface LoginInput {
 interface Mutation {
   __typename?: 'Mutation';
   addProperty: Property;
+  deleteProperty: Scalars['Boolean'];
   addRoom: Room;
+  deleteRoom: Scalars['Boolean'];
   createUser: User;
   login: Scalars['String'];
 }
@@ -55,8 +57,18 @@ interface MutationAddPropertyArgs {
 }
 
 
+interface MutationDeletePropertyArgs {
+  id: Scalars['Int'];
+}
+
+
 interface MutationAddRoomArgs {
   input: AddRoomInput;
+}
+
+
+interface MutationDeleteRoomArgs {
+  id: Scalars['Int'];
 }
 
 
@@ -79,16 +91,28 @@ interface Property {
   year: Scalars['String'];
 }
 
+interface PropertyEntity {
+  __typename?: 'PropertyEntity';
+  property: Property;
+  rooms: Array<Maybe<Room>>;
+}
+
 interface Query {
   __typename?: 'Query';
   getProperties: Array<Maybe<Property>>;
   getStatistics: Statistic;
+  getPropertyEntity: PropertyEntity;
   getUser: User;
 }
 
 
 interface QueryGetPropertiesArgs {
   year: Scalars['String'];
+}
+
+
+interface QueryGetPropertyEntityArgs {
+  propertyId: Scalars['Int'];
 }
 
 
@@ -224,6 +248,7 @@ export type ResolversTypes = {
   LoginInput: LoginInput;
   Mutation: ResolverTypeWrapper<{}>;
   Property: ResolverTypeWrapper<Property>;
+  PropertyEntity: ResolverTypeWrapper<PropertyEntity>;
   Query: ResolverTypeWrapper<{}>;
   Room: ResolverTypeWrapper<Room>;
   Statistic: ResolverTypeWrapper<Statistic>;
@@ -242,6 +267,7 @@ export type ResolversParentTypes = {
   LoginInput: LoginInput;
   Mutation: {};
   Property: Property;
+  PropertyEntity: PropertyEntity;
   Query: {};
   Room: Room;
   Statistic: Statistic;
@@ -251,7 +277,9 @@ export type ResolversParentTypes = {
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addProperty?: Resolver<ResolversTypes['Property'], ParentType, ContextType, RequireFields<MutationAddPropertyArgs, 'input'>>;
+  deleteProperty?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeletePropertyArgs, 'id'>>;
   addRoom?: Resolver<ResolversTypes['Room'], ParentType, ContextType, RequireFields<MutationAddRoomArgs, 'input'>>;
+  deleteRoom?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteRoomArgs, 'id'>>;
   createUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'user'>>;
   login?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'credentials'>>;
 };
@@ -266,9 +294,16 @@ export type PropertyResolvers<ContextType = any, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type PropertyEntityResolvers<ContextType = any, ParentType extends ResolversParentTypes['PropertyEntity'] = ResolversParentTypes['PropertyEntity']> = {
+  property?: Resolver<ResolversTypes['Property'], ParentType, ContextType>;
+  rooms?: Resolver<Array<Maybe<ResolversTypes['Room']>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   getProperties?: Resolver<Array<Maybe<ResolversTypes['Property']>>, ParentType, ContextType, RequireFields<QueryGetPropertiesArgs, 'year'>>;
   getStatistics?: Resolver<ResolversTypes['Statistic'], ParentType, ContextType>;
+  getPropertyEntity?: Resolver<ResolversTypes['PropertyEntity'], ParentType, ContextType, RequireFields<QueryGetPropertyEntityArgs, 'propertyId'>>;
   getUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserArgs, 'id'>>;
 };
 
@@ -311,6 +346,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 export type Resolvers<ContextType = any> = {
   Mutation?: MutationResolvers<ContextType>;
   Property?: PropertyResolvers<ContextType>;
+  PropertyEntity?: PropertyEntityResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Room?: RoomResolvers<ContextType>;
   Statistic?: StatisticResolvers<ContextType>;

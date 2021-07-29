@@ -1,11 +1,14 @@
 type Query {
 	getProperties(year: String!): [Property]!
 	getStatistics: Statistic!
+	getPropertyEntity(propertyId: Int!): PropertyEntity!
 }
 
 type Mutation {
 	addProperty(input: AddPropertyInput!): Property!
+	deleteProperty(id: Int!): Boolean!
 	addRoom(input: AddRoomInput!): Room!
+	deleteRoom(id: Int!): Boolean!
 }
 
 input AddPropertyInput {
@@ -51,4 +54,9 @@ type Statistic {
 	totalOpenRooms: Int!
 	totalUnavailableRooms: Int!
 	totalRooms: Int!
+}
+
+type PropertyEntity {
+	property: Property!
+	rooms: [Room]!
 }
