@@ -1,4 +1,3 @@
-import { Property } from '../../../db/models/Property';
 import { Room } from '../../../db/models/Room';
 import { UpdateLog } from '../../../db/models/UpdateLog';
 
@@ -10,8 +9,7 @@ export const addRoom: Resolvers.MutationResolvers['addRoom'] = async (
 	context.logger.info('Mutation: addRoom');
 
 	const created = await Room.query().insertAndFetch({
-		...args.input,
-		available: true
+		...args.input
 	});
 
 	await UpdateLog.query().insertAndFetch({

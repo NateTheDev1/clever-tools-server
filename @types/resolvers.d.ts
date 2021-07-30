@@ -36,6 +36,11 @@ interface CreateUserInput {
   createdBy?: Maybe<Scalars['String']>;
 }
 
+interface EditRoomInput {
+  name?: Maybe<Scalars['String']>;
+  available?: Maybe<Scalars['Boolean']>;
+}
+
 interface LoginInput {
   username: Scalars['String'];
   password: Scalars['String'];
@@ -47,6 +52,7 @@ interface Mutation {
   deleteProperty: Scalars['Boolean'];
   addRoom: Room;
   deleteRoom: Scalars['Boolean'];
+  editRoom: Scalars['Boolean'];
   createUser: User;
   login: Scalars['String'];
 }
@@ -69,6 +75,12 @@ interface MutationAddRoomArgs {
 
 interface MutationDeleteRoomArgs {
   id: Scalars['Int'];
+}
+
+
+interface MutationEditRoomArgs {
+  id: Scalars['Int'];
+  input?: Maybe<EditRoomInput>;
 }
 
 
@@ -113,6 +125,7 @@ interface QueryGetPropertiesArgs {
 
 interface QueryGetPropertyEntityArgs {
   propertyId: Scalars['Int'];
+  year: Scalars['Int'];
 }
 
 
@@ -245,6 +258,7 @@ export type ResolversTypes = {
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   CreateUserInput: CreateUserInput;
+  EditRoomInput: EditRoomInput;
   LoginInput: LoginInput;
   Mutation: ResolverTypeWrapper<{}>;
   Property: ResolverTypeWrapper<Property>;
@@ -264,6 +278,7 @@ export type ResolversParentTypes = {
   Int: Scalars['Int'];
   Boolean: Scalars['Boolean'];
   CreateUserInput: CreateUserInput;
+  EditRoomInput: EditRoomInput;
   LoginInput: LoginInput;
   Mutation: {};
   Property: Property;
@@ -280,6 +295,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteProperty?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeletePropertyArgs, 'id'>>;
   addRoom?: Resolver<ResolversTypes['Room'], ParentType, ContextType, RequireFields<MutationAddRoomArgs, 'input'>>;
   deleteRoom?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteRoomArgs, 'id'>>;
+  editRoom?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationEditRoomArgs, 'id'>>;
   createUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'user'>>;
   login?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'credentials'>>;
 };
@@ -303,7 +319,7 @@ export type PropertyEntityResolvers<ContextType = any, ParentType extends Resolv
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   getProperties?: Resolver<Array<Maybe<ResolversTypes['Property']>>, ParentType, ContextType, RequireFields<QueryGetPropertiesArgs, 'year'>>;
   getStatistics?: Resolver<ResolversTypes['Statistic'], ParentType, ContextType>;
-  getPropertyEntity?: Resolver<ResolversTypes['PropertyEntity'], ParentType, ContextType, RequireFields<QueryGetPropertyEntityArgs, 'propertyId'>>;
+  getPropertyEntity?: Resolver<ResolversTypes['PropertyEntity'], ParentType, ContextType, RequireFields<QueryGetPropertyEntityArgs, 'propertyId' | 'year'>>;
   getUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserArgs, 'id'>>;
 };
 

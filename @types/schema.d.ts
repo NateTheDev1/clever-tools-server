@@ -33,6 +33,11 @@ interface CreateUserInput {
   createdBy?: Maybe<Scalars['String']>;
 }
 
+interface EditRoomInput {
+  name?: Maybe<Scalars['String']>;
+  available?: Maybe<Scalars['Boolean']>;
+}
+
 interface LoginInput {
   username: Scalars['String'];
   password: Scalars['String'];
@@ -44,6 +49,7 @@ interface Mutation {
   deleteProperty: Scalars['Boolean'];
   addRoom: Room;
   deleteRoom: Scalars['Boolean'];
+  editRoom: Scalars['Boolean'];
   createUser: User;
   login: Scalars['String'];
 }
@@ -66,6 +72,12 @@ interface MutationAddRoomArgs {
 
 interface MutationDeleteRoomArgs {
   id: Scalars['Int'];
+}
+
+
+interface MutationEditRoomArgs {
+  id: Scalars['Int'];
+  input?: Maybe<EditRoomInput>;
 }
 
 
@@ -110,6 +122,7 @@ interface QueryGetPropertiesArgs {
 
 interface QueryGetPropertyEntityArgs {
   propertyId: Scalars['Int'];
+  year: Scalars['Int'];
 }
 
 

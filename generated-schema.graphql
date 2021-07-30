@@ -1,7 +1,7 @@
 type Query {
   getProperties(year: String!): [Property]!
   getStatistics: Statistic!
-  getPropertyEntity(propertyId: Int!): PropertyEntity!
+  getPropertyEntity(propertyId: Int!, year: Int!): PropertyEntity!
   getUser(id: Int!): User!
 }
 
@@ -10,8 +10,14 @@ type Mutation {
   deleteProperty(id: Int!): Boolean!
   addRoom(input: AddRoomInput!): Room!
   deleteRoom(id: Int!): Boolean!
+  editRoom(id: Int!, input: EditRoomInput): Boolean!
   createUser(user: CreateUserInput!): User!
   login(credentials: LoginInput!): String!
+}
+
+input EditRoomInput {
+  name: String
+  available: Boolean
 }
 
 input AddPropertyInput {
