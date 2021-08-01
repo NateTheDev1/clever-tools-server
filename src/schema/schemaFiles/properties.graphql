@@ -7,9 +7,15 @@ type Query {
 type Mutation {
 	addProperty(input: AddPropertyInput!): Property!
 	deleteProperty(id: Int!): Boolean!
+	editProperty(id: Int!, input: EditPropertyInput!): Boolean!
 	addRoom(input: AddRoomInput!): Room!
 	deleteRoom(id: Int!): Boolean!
 	editRoom(id: Int!, input: EditRoomInput): Boolean!
+}
+
+input EditPropertyInput {
+	name: String
+	address: String
 }
 
 input EditRoomInput {

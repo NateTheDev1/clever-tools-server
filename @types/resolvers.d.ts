@@ -36,6 +36,11 @@ interface CreateUserInput {
   createdBy?: Maybe<Scalars['String']>;
 }
 
+interface EditPropertyInput {
+  name?: Maybe<Scalars['String']>;
+  address?: Maybe<Scalars['String']>;
+}
+
 interface EditRoomInput {
   name?: Maybe<Scalars['String']>;
   available?: Maybe<Scalars['Boolean']>;
@@ -50,6 +55,7 @@ interface Mutation {
   __typename?: 'Mutation';
   addProperty: Property;
   deleteProperty: Scalars['Boolean'];
+  editProperty: Scalars['Boolean'];
   addRoom: Room;
   deleteRoom: Scalars['Boolean'];
   editRoom: Scalars['Boolean'];
@@ -65,6 +71,12 @@ interface MutationAddPropertyArgs {
 
 interface MutationDeletePropertyArgs {
   id: Scalars['Int'];
+}
+
+
+interface MutationEditPropertyArgs {
+  id: Scalars['Int'];
+  input: EditPropertyInput;
 }
 
 
@@ -258,6 +270,7 @@ export type ResolversTypes = {
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   CreateUserInput: CreateUserInput;
+  EditPropertyInput: EditPropertyInput;
   EditRoomInput: EditRoomInput;
   LoginInput: LoginInput;
   Mutation: ResolverTypeWrapper<{}>;
@@ -278,6 +291,7 @@ export type ResolversParentTypes = {
   Int: Scalars['Int'];
   Boolean: Scalars['Boolean'];
   CreateUserInput: CreateUserInput;
+  EditPropertyInput: EditPropertyInput;
   EditRoomInput: EditRoomInput;
   LoginInput: LoginInput;
   Mutation: {};
@@ -293,6 +307,7 @@ export type ResolversParentTypes = {
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addProperty?: Resolver<ResolversTypes['Property'], ParentType, ContextType, RequireFields<MutationAddPropertyArgs, 'input'>>;
   deleteProperty?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeletePropertyArgs, 'id'>>;
+  editProperty?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationEditPropertyArgs, 'id' | 'input'>>;
   addRoom?: Resolver<ResolversTypes['Room'], ParentType, ContextType, RequireFields<MutationAddRoomArgs, 'input'>>;
   deleteRoom?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteRoomArgs, 'id'>>;
   editRoom?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationEditRoomArgs, 'id'>>;

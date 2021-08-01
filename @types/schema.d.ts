@@ -33,6 +33,11 @@ interface CreateUserInput {
   createdBy?: Maybe<Scalars['String']>;
 }
 
+interface EditPropertyInput {
+  name?: Maybe<Scalars['String']>;
+  address?: Maybe<Scalars['String']>;
+}
+
 interface EditRoomInput {
   name?: Maybe<Scalars['String']>;
   available?: Maybe<Scalars['Boolean']>;
@@ -47,6 +52,7 @@ interface Mutation {
   __typename?: 'Mutation';
   addProperty: Property;
   deleteProperty: Scalars['Boolean'];
+  editProperty: Scalars['Boolean'];
   addRoom: Room;
   deleteRoom: Scalars['Boolean'];
   editRoom: Scalars['Boolean'];
@@ -62,6 +68,12 @@ interface MutationAddPropertyArgs {
 
 interface MutationDeletePropertyArgs {
   id: Scalars['Int'];
+}
+
+
+interface MutationEditPropertyArgs {
+  id: Scalars['Int'];
+  input: EditPropertyInput;
 }
 
 
