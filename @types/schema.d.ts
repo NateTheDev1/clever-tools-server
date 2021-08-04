@@ -58,6 +58,7 @@ interface Mutation {
   editRoom: Scalars['Boolean'];
   createUser: User;
   login: Scalars['String'];
+  deleteUser: Scalars['Boolean'];
 }
 
 
@@ -102,6 +103,11 @@ interface MutationLoginArgs {
   credentials: LoginInput;
 }
 
+
+interface MutationDeleteUserArgs {
+  id: Scalars['Int'];
+}
+
 interface Property {
   __typename?: 'Property';
   id: Scalars['Int'];
@@ -124,6 +130,7 @@ interface Query {
   getStatistics: Statistic;
   getPropertyEntity: PropertyEntity;
   getUser: User;
+  searchUsers: Array<Maybe<User>>;
 }
 
 
@@ -140,6 +147,11 @@ interface QueryGetPropertyEntityArgs {
 
 interface QueryGetUserArgs {
   id: Scalars['Int'];
+}
+
+
+interface QuerySearchUsersArgs {
+  query: Scalars['String'];
 }
 
 interface Room {

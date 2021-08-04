@@ -61,6 +61,7 @@ interface Mutation {
   editRoom: Scalars['Boolean'];
   createUser: User;
   login: Scalars['String'];
+  deleteUser: Scalars['Boolean'];
 }
 
 
@@ -105,6 +106,11 @@ interface MutationLoginArgs {
   credentials: LoginInput;
 }
 
+
+interface MutationDeleteUserArgs {
+  id: Scalars['Int'];
+}
+
 interface Property {
   __typename?: 'Property';
   id: Scalars['Int'];
@@ -127,6 +133,7 @@ interface Query {
   getStatistics: Statistic;
   getPropertyEntity: PropertyEntity;
   getUser: User;
+  searchUsers: Array<Maybe<User>>;
 }
 
 
@@ -143,6 +150,11 @@ interface QueryGetPropertyEntityArgs {
 
 interface QueryGetUserArgs {
   id: Scalars['Int'];
+}
+
+
+interface QuerySearchUsersArgs {
+  query: Scalars['String'];
 }
 
 interface Room {
@@ -313,6 +325,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   editRoom?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationEditRoomArgs, 'id'>>;
   createUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'user'>>;
   login?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'credentials'>>;
+  deleteUser?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
 };
 
 export type PropertyResolvers<ContextType = any, ParentType extends ResolversParentTypes['Property'] = ResolversParentTypes['Property']> = {
@@ -336,6 +349,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getStatistics?: Resolver<ResolversTypes['Statistic'], ParentType, ContextType>;
   getPropertyEntity?: Resolver<ResolversTypes['PropertyEntity'], ParentType, ContextType, RequireFields<QueryGetPropertyEntityArgs, 'propertyId' | 'year'>>;
   getUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserArgs, 'id'>>;
+  searchUsers?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType, RequireFields<QuerySearchUsersArgs, 'query'>>;
 };
 
 export type RoomResolvers<ContextType = any, ParentType extends ResolversParentTypes['Room'] = ResolversParentTypes['Room']> = {

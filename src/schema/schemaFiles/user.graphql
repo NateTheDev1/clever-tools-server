@@ -1,10 +1,12 @@
 type Query {
 	getUser(id: Int!): User!
+	searchUsers(query: String!): [User]!
 }
 
 type Mutation {
 	createUser(user: CreateUserInput!): User!
 	login(credentials: LoginInput!): String!
+	deleteUser(id: Int!): Boolean!
 }
 
 input LoginInput {
