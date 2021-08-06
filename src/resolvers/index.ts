@@ -8,6 +8,7 @@ import { createUser } from './mutation/user/createUser';
 import { deleteUser } from './mutation/user/deleteUser';
 import { login } from './mutation/user/login';
 import { getProperties } from './query/properties/getProperties';
+import { getPropertiesSearch } from './query/properties/getPropertiesSearch';
 import { getPropertyEntity } from './query/properties/getPropertyEntity';
 import { getStatistics } from './query/properties/getStatistics';
 import { PropertyResolvers, RoomResolvers } from './query/properties/property';
@@ -20,7 +21,8 @@ export const resolvers: Resolvers.Resolvers = {
 		getProperties,
 		getStatistics,
 		getPropertyEntity,
-		searchUsers
+		searchUsers,
+		getPropertiesSearch
 	},
 	Property: PropertyResolvers,
 	Room: RoomResolvers,

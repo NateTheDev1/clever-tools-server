@@ -1,5 +1,6 @@
 type Query {
 	getProperties(year: String!): [Property]!
+	getPropertiesSearch(year: String!, query: String!): [Property]!
 	getStatistics: Statistic!
 	getPropertyEntity(propertyId: Int!, year: Int!): PropertyEntity!
 }

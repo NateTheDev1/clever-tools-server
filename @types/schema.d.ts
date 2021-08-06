@@ -127,6 +127,7 @@ interface PropertyEntity {
 interface Query {
   __typename?: 'Query';
   getProperties: Array<Maybe<Property>>;
+  getPropertiesSearch: Array<Maybe<Property>>;
   getStatistics: Statistic;
   getPropertyEntity: PropertyEntity;
   getUser: User;
@@ -136,6 +137,12 @@ interface Query {
 
 interface QueryGetPropertiesArgs {
   year: Scalars['String'];
+}
+
+
+interface QueryGetPropertiesSearchArgs {
+  year: Scalars['String'];
+  query: Scalars['String'];
 }
 
 

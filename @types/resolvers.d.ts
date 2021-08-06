@@ -130,6 +130,7 @@ interface PropertyEntity {
 interface Query {
   __typename?: 'Query';
   getProperties: Array<Maybe<Property>>;
+  getPropertiesSearch: Array<Maybe<Property>>;
   getStatistics: Statistic;
   getPropertyEntity: PropertyEntity;
   getUser: User;
@@ -139,6 +140,12 @@ interface Query {
 
 interface QueryGetPropertiesArgs {
   year: Scalars['String'];
+}
+
+
+interface QueryGetPropertiesSearchArgs {
+  year: Scalars['String'];
+  query: Scalars['String'];
 }
 
 
@@ -346,6 +353,7 @@ export type PropertyEntityResolvers<ContextType = any, ParentType extends Resolv
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   getProperties?: Resolver<Array<Maybe<ResolversTypes['Property']>>, ParentType, ContextType, RequireFields<QueryGetPropertiesArgs, 'year'>>;
+  getPropertiesSearch?: Resolver<Array<Maybe<ResolversTypes['Property']>>, ParentType, ContextType, RequireFields<QueryGetPropertiesSearchArgs, 'year' | 'query'>>;
   getStatistics?: Resolver<ResolversTypes['Statistic'], ParentType, ContextType>;
   getPropertyEntity?: Resolver<ResolversTypes['PropertyEntity'], ParentType, ContextType, RequireFields<QueryGetPropertyEntityArgs, 'propertyId' | 'year'>>;
   getUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserArgs, 'id'>>;
