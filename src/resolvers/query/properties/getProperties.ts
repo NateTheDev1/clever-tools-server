@@ -9,7 +9,9 @@ export const getProperties: Resolvers.QueryResolvers['getProperties'] = async (
 ) => {
 	context.logger.info('Query: getProperties');
 
-	const properties = await Property.query().where({ year: args.year });
+	const properties = await Property.query()
+		.where({ year: args.year })
+		.orderBy('name', 'ASC');
 
 	return properties;
 };
