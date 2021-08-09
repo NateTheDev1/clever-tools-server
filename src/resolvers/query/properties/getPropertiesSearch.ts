@@ -9,7 +9,7 @@ export const getPropertiesSearch: Resolvers.QueryResolvers['getPropertiesSearch'
 
 		const properties = await Property.query()
 			.where({ year: args.year })
-			.where(raw(`name LIKE '%${args.query}%'`))
+			.where(raw(`UPPER(name) LIKE UPPER('%${args.query}%')`))
 			.orderBy('name', 'ASC');
 
 		return properties;
