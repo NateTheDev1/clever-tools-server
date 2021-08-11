@@ -11,7 +11,7 @@ export const getProperties: Resolvers.QueryResolvers['getProperties'] = async (
 
 	const properties = await Property.query()
 		.where({ year: args.year })
-		.orderBy('name', 'ASC');
+		.orderBy('address', 'ASC');
 
 	return properties;
 };
